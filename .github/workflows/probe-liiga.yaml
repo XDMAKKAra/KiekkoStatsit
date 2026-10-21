@@ -1,0 +1,28 @@
+on:
+  push:
+    branches: [probe-liiga]
+name: probe-liiga
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: probe
+        shell: bash
+        run: |
+          B=https://liiga.fi/api/v2
+          show () { echo "=================== $1"; curl -sS -m 30 -w '\nHTTP %{http_code}\n' "$1" -o /tmp/r.json; head -c 200 /tmp/r.json; echo; jq -c 'if type=="array" then {len: length, first: .[0]} else . end' /tmp/r.json 2>/dev/null | head -c 6000; echo; }
+          show "$B/games?tournament=runkosarja&season=2025"
+          GID=$(curl -sS "$B/games?tournament=runkosarja&season=2025" | jq '[.[] | select(.ended==true)][0].id')
+          echo "GID=$GID"
+          show "$B/games/2025/$GID"
+          show "$B/games/stats/2025/$GID"
+          show "$B/shotmap/2025/$GID"
+          show "$B/standings/?season=2025"
+          show "$B/players/stats/summed/2025/2025/runkosarja/true?dataType=basicStats"
+          show "$B/players/stats/summed/2025/2025/runkosarja/false?dataType=basicStats"
+          show "$B/teams/info"
+          show "$B/teams"
+          show "$B/games?tournament=playoffs&season=2025"
+          show "$B/games?tournament=runkosarja&season=2026"
+          show "$B/games/2025/$GID/events"
+          show "$B/goalies/stats/summed/2025/2025/runkosarja/true"
