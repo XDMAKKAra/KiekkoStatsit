@@ -1,21 +1,27 @@
-Package: hockeyR
-Title: Collect and Clean Hockey Stats
-Version: 1.4.1
-Authors@R: 
+Package: KiekkoStatsit
+Title: Collect and Clean Hockey Stats from Liiga and the NHL
+Version: 2.0.0
+Authors@R: c(
+    person(given = "XDMAKKAra",
+           role = c("aut", "cre"),
+           email = "XDMAKKAra@users.noreply.github.com"),
     person(given = "Daniel",
            family = "Morse",
-           role = c("aut", "cre"),
-           email = "danmorse8642@gmail.com")
-Description: Various functions to scrape hockey play-by-play data from the
-    <https://www.nhl.com/>. It also contains functions to scrape data from <https://www.hockey-reference.com/>,
-    including standings, player stats, and jersey number history.
+           role = c("aut", "cph"),
+           email = "danmorse8642@gmail.com",
+           comment = "Author of hockeyR, which this package is built on"))
+Description: Functions to collect Finnish Liiga data from <https://liiga.fi/>,
+    including schedules, goals, shot locations, box scores, standings and
+    player stats. Also scrapes NHL play-by-play data from <https://www.nhl.com/>
+    and standings, player stats and jersey number history from
+    <https://www.hockey-reference.com/>. Built on the 'hockeyR' package.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-URL: https://github.com/danmorse314/hockeyR
-BugReports: https://github.com/danmorse314/hockeyR/issues
+RoxygenNote: 7.3.1
+URL: https://github.com/XDMAKKAra/KiekkoStatsit
+BugReports: https://github.com/XDMAKKAra/KiekkoStatsit/issues
 Depends: 
     R (>= 3.5.0)
 Imports:
@@ -43,5 +49,7 @@ Suggests:
     knitr,
     rmarkdown,
     scales,
-    sportyR
+    sportyR,
+    testthat (>= 3.1.7)
+Config/testthat/edition: 3
 VignetteBuilder: knitr

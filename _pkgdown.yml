@@ -1,4 +1,4 @@
-url: https://hockeyr.netlify.app
+url: https://github.com/XDMAKKAra/KiekkoStatsit
 
 template:
   params:
@@ -12,6 +12,10 @@ development:
   mode: auto
 
 reference:
+- title: Liiga
+  desc: Functions to collect Finnish Liiga data from liiga.fi.
+  contents:
+  - starts_with("liiga_")
 - title: Play-by-play data
   desc: These are the functions to gather play-by-play data from the NHL API.
   contents:

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(hockeyR)
+library(KiekkoStatsit)
 `%>%` <- magrittr::`%>%`
 ```
 
@@ -86,7 +86,7 @@ df3 %>%
   ) +
   ggplot2::labs(x = NULL, y = "Points",
        title = "Top-10 point scorers in the NHL in 2021-22",
-       caption = "data pulled from hockey-reference.com using hockeyR")
+       caption = "data pulled from hockey-reference.com using KiekkoStatsit")
 ```
 Use the `get_rosters()` function to look up a team roster at season's end for any prior season. By default, it will only pull basic player info (name, age, height & weight, etc), but you can grab all the basic counting stats by setting `include_stats` to `TRUE`. Note as shown below that the `team` argument accepts both full team names or team abbreviations.
 
@@ -132,5 +132,5 @@ player_stats %>%
   ggplot2::labs(x = "Assists/60", y = "Goals/60",
        title = "2000-01 Wings v Avs, regular season stats",
        subtitle = "min. 300 minutes",
-       caption = "data pulled from hockey-reference.com using hockeyR")
+       caption = "data pulled from hockey-reference.com using KiekkoStatsit")
 ```

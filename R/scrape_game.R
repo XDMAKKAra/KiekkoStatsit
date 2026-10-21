@@ -123,7 +123,7 @@
 scrape_game <- function(game_id){
 
   # load team abbreviations
-  team_info <- hockeyR::team_logos_colors
+  team_info <- KiekkoStatsit::team_logos_colors
 
   # get game url
   url <- glue::glue("https://api-web.nhle.com/v1/gamecenter/{game_id}/play-by-play")

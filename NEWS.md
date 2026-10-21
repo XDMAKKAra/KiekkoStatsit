@@ -1,3 +1,19 @@
+# KiekkoStatsit 2.0.0
+
+* Renamed the package from hockeyR to KiekkoStatsit.
+
+## Finnish Liiga support
+
+* `liiga_games()` schedule and results with xG, power plays, attendance and arena
+* `liiga_goals()` every goal of a season, with goal type flags
+* `liiga_game()` and `liiga_game_rosters()` lineups, goals, penalties and referees for a game
+* `liiga_shots()` shot attempts with coordinates, distance, angle, strength and xG
+* `liiga_boxscore()` team, skater and goalie stats per game, including tracking data
+* `liiga_goalie_stats()` goalie season totals with goals saved above expected
+* `liiga_standings()`, `liiga_skater_stats()`, `liiga_player()`, `liiga_teams()`
+* `liiga_current_season()`
+* Offline tests against trimmed real liiga.fi responses
+
 # hockeyR 1.4.1
 
 # hockeyR 1.4.0

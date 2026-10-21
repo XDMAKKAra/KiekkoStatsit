@@ -29,7 +29,7 @@
 get_game_ids <- function(season = NULL, day = as.Date(Sys.Date(), "%Y-%m-%d")){
 
   # load team abbreviations
-  team_info <- hockeyR::team_logos_colors
+  team_info <- KiekkoStatsit::team_logos_colors
 
   if(is.null(season)){
 
