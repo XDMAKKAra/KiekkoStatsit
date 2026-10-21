@@ -1,28 +1,39 @@
 on:
   push:
     branches: [probe-liiga]
+    paths: [.github/workflows/probe-liiga.yaml]
 name: probe-liiga
+permissions:
+  contents: write
 jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: probe
         shell: bash
         run: |
+          set +e
+          mkdir -p probe
           B=https://liiga.fi/api/v2
-          show () { echo "=================== $1"; curl -sS -m 30 -w '\nHTTP %{http_code}\n' "$1" -o /tmp/r.json; head -c 200 /tmp/r.json; echo; jq -c 'if type=="array" then {len: length, first: .[0]} else . end' /tmp/r.json 2>/dev/null | head -c 6000; echo; }
-          show "$B/games?tournament=runkosarja&season=2025"
-          GID=$(curl -sS "$B/games?tournament=runkosarja&season=2025" | jq '[.[] | select(.ended==true)][0].id')
-          echo "GID=$GID"
-          show "$B/games/2025/$GID"
-          show "$B/games/stats/2025/$GID"
-          show "$B/shotmap/2025/$GID"
-          show "$B/standings/?season=2025"
-          show "$B/players/stats/summed/2025/2025/runkosarja/true?dataType=basicStats"
-          show "$B/players/stats/summed/2025/2025/runkosarja/false?dataType=basicStats"
-          show "$B/teams/info"
-          show "$B/teams"
-          show "$B/games?tournament=playoffs&season=2025"
-          show "$B/games?tournament=runkosarja&season=2026"
-          show "$B/games/2025/$GID/events"
-          show "$B/goalies/stats/summed/2025/2025/runkosarja/true"
+          get () { curl -sS -m 30 -A "Mozilla/5.0" -w '%{http_code}' -o "probe/$1.json" "$2" > "probe/$1.code" 2> "probe/$1.err"; echo "$1 $(cat probe/$1.code) $2" >> probe/index.txt; }
+          get games "$B/games?tournament=runkosarja&season=2025"
+          GID=$(jq '[.[] | select(.ended==true)][-1].id' probe/games.json)
+          echo "GID=$GID" >> probe/index.txt
+          get game "$B/games/2025/$GID"
+          get gamestats "$B/games/stats/2025/$GID"
+          get shotmap "$B/shotmap/2025/$GID"
+          get standings "$B/standings/?season=2025"
+          get skaters "$B/players/stats/summed/2025/2025/runkosarja/true?dataType=basicStats"
+          get skaters_false "$B/players/stats/summed/2025/2025/runkosarja/false?dataType=basicStats"
+          get goalies "$B/goalies/stats/summed/2025/2025/runkosarja/true"
+          get teams_info "$B/teams/info"
+          get teams "$B/teams"
+          get playoffs "$B/games?tournament=playoffs&season=2025"
+          get games2026 "$B/games?tournament=runkosarja&season=2026"
+          get events "$B/games/2025/$GID/events"
+          get gamelineups "$B/games/lineups/2025/$GID"
+          get schedule "$B/schedule?tournament=runkosarja&season=2026"
+          ls -la probe
+          git config user.name probe-bot; git config user.email probe@users.noreply.github.com
+          git add probe && git commit -m "probe results" && git push
