@@ -18,25 +18,9 @@ jobs:
           B=https://liiga.fi/api/v2
           get () { curl -sS -m 30 -A "Mozilla/5.0" -w '%{http_code}' -o "probe/$1.json" "$2" > "probe/$1.code" 2> "probe/$1.err"; echo "$1 $(cat probe/$1.code) $2" >> probe/index.txt; }
           rm -f probe/*
-          get g2 "$B/players/stats/summed/2025/2025/runkosarja/true?dataType=goalies"
-          get g3 "$B/players/stats/summed/2025/2025/runkosarja/true?dataType=goalieStats"
-          get g4 "$B/goalies/stats/summed/2025/2025/runkosarja"
-          get g5 "$B/players/goalies/stats/summed/2025/2025/runkosarja/true"
-          get g6 "$B/goalkeepers/stats/summed/2025/2025/runkosarja/true"
-          get g7 "$B/players/stats/goalies/2025/2025/runkosarja/true"
-          get s1 "$B/shotmap/2025/400"
-          get s2 "$B/games/shotmap/2025/480"
-          get s3 "$B/shots/2025/480"
-          get s4 "$B/games/2025/480/shots"
-          get s5 "$B/shotmap/2026/100"
-          get p1 "$B/players/info/23017821"
-          get p2 "$B/players/23017821"
-          get p3 "$B/players/stats/23017821"
-          get c1 "$B/games?tournament=runkosarja&season=2027"
-          get c2 "$B/standings/?season=2027"
-          get c3 "$B/players/stats/summed/2027/2027/runkosarja/true?dataType=basicStats"
-          get pl "$B/players/stats/summed/2025/2025/playoffs/true?dataType=basicStats"
-          get pre "$B/games?tournament=valmistavat_ottelut&season=2026"
+          get game400 "$B/games/2025/400"
+          get stats400 "$B/games/stats/2025/400"
+          get goalie "$B/players/info/29969180"
           ls -la probe
           git config user.name probe-bot; git config user.email probe@users.noreply.github.com
           git add probe && git commit -m "probe results" && git push
