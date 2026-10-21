@@ -1,0 +1,16 @@
+games 200 https://liiga.fi/api/v2/games?tournament=runkosarja&season=2025
+GID=480
+game 200 https://liiga.fi/api/v2/games/2025/480
+gamestats 200 https://liiga.fi/api/v2/games/stats/2025/480
+shotmap 200 https://liiga.fi/api/v2/shotmap/2025/480
+standings 200 https://liiga.fi/api/v2/standings/?season=2025
+skaters 200 https://liiga.fi/api/v2/players/stats/summed/2025/2025/runkosarja/true?dataType=basicStats
+skaters_false 200 https://liiga.fi/api/v2/players/stats/summed/2025/2025/runkosarja/false?dataType=basicStats
+goalies 403 https://liiga.fi/api/v2/goalies/stats/summed/2025/2025/runkosarja/true
+teams_info 200 https://liiga.fi/api/v2/teams/info
+teams 403 https://liiga.fi/api/v2/teams
+playoffs 200 https://liiga.fi/api/v2/games?tournament=playoffs&season=2025
+games2026 200 https://liiga.fi/api/v2/games?tournament=runkosarja&season=2026
+events 403 https://liiga.fi/api/v2/games/2025/480/events
+gamelineups 403 https://liiga.fi/api/v2/games/lineups/2025/480
+schedule 200 https://liiga.fi/api/v2/schedule?tournament=runkosarja&season=2026
